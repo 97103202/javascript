@@ -1,0 +1,244 @@
+<html>
+
+<head>
+    <title>Simple Memory</title>
+    <style>
+        h1 {
+            text-align: center;
+            font-family: verdana;
+            font-size: 25px;
+            color: white;
+        }
+
+        .memoryContainer {
+            width: 240px;
+            height: 545px;
+            border: 1px solid #E9E9E9;
+            margin: auto;
+            background-color: #666;
+            perspective: 1000px;
+        }
+
+        .memoryCard {
+            width: 100px;
+            height: 100px;
+            background-color: #0099FF;
+            margin: 10px;
+            border: 10px solid #999999;
+            font-size: 25px;
+            font-weight: bold;
+            color: white;
+            float: left;
+
+            transition: all .2s;
+            background-image: url('background.png');
+
+        }
+
+        .memoryCard:active {
+            transform: scale(.95);
+            transition: all .2s;
+
+        }
+
+        .memoryCard.flip {
+            transform: rotateY(180deg);
+        }
+
+
+
+        #button {
+            padding-right: -2cm;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+        }
+
+        .info-container .tries {
+            float: right;
+            width: 50%;
+            text-align: right;
+        }
+    </style>
+    <script>
+
+
+        var userClick1 = 0;
+        var userClick2 = 0;
+        var userSelectedCard1 = "";
+        var userSelectedCard2 = "";
+
+
+        function checkClickedCard(cardNum, cardId) {
+            //Geklikte kaart disablen, want je mag maar eenkeer op dezelfde kaart klikken
+            document.getElementById(cardId).disabled = true;
+            //juiste waarde op de kaart zetten
+            //document.getElementById(cardId).value = cardNum;
+            //alert("background-image: url (" + cardNum + ".png)");
+            document.getElementById(cardId).style = "background-image: url(" + cardNum + ".png)";
+            //document.getElementById(cardId).style = "
+
+            //background: url(myimage.png);
+
+            //Lees en onthoudt klik1 en klik2
+            if (userClick1 == 0) {
+                userClick1 = cardNum;
+                userSelectedCard1 = cardId;
+            } else {
+                userClick2 = cardNum;
+                userSelectedCard2 = cardId;
+            }
+
+            if (userClick2 != 0) {
+                if (userClick1 == userClick2) {
+                    document.getElementById('alert').innerhtml = 'goed zo';
+                    console.log('goed')
+
+                } else {
+                    let triesElement = document.querySelector('.tries span');
+
+                    document.getElementById('alert').innerhtml = 'fout';
+                    console.log('fout');
+                    document.getElementById(userSelectedCard1).
+                        disabled = false;
+                    document.getElementById(userSelectedCard2).
+                        disabled = false;
+                    //document.getElementById(userSelectedCard1).
+                    // value = "";
+                    //document.getElementById(userSelectedCard2).
+                    // value = "";
+
+                    setTimeout(turnBack, 2000);
+
+                    //SSSSSSSSSSSSSS
+
+                    triesElement.innerHTML = parseInt(triesElement.innerHTML) + 1;
+
+                    /* setTimeout(() => {
+ 
+                         userClick1.classList.remove('is-flipped');
+                         userClick2.classList.remove('is-flipped');
+ 
+                     }, duration);
+ 
+                     // document.getElementById('fail').play();*/
+
+
+
+
+                    //}
+
+
+                }
+            }
+        }
+
+
+
+        //FFFFFFFFFFFF
+
+
+
+
+
+        function turnBack() {
+            document.getElementById(userSelectedCard1).style.backgroundImage = "url(//memory/background.png";
+            document.getElementById(userSelectedCard2).style.backgroundImage = "url(//memory/background.png";
+            userClick1.classList.remove('is-flipped');
+            userClick2.classList.remove('is-flipped');
+            userSelectedCard1 = "";
+            userSelectedCard2 = "";
+            userClick1 = 0;
+            userClick2 = 0;
+
+
+
+        }
+
+
+
+        document.getElementById("teller").innerHTML = "Je hebt " + teller + " pogingen gedaan!";
+        userClick1 = 0;
+        userClick2 = 0;
+        teller++;
+
+
+
+
+
+
+
+
+
+
+        //FFFFFFFFFFFFFFFFF
+
+
+
+        function shuffleCards() {
+            document.getElementById("memoryCards").innerHTML = '';
+            let cardsArr = [];
+            for (let i = 1; i < 10 / 2; i++) {
+                cardsArr.push(i);
+                cardsArr.push(i);
+            } while (cardsArr.length > 0) {
+                let randomNumber = Math.floor(Math.random() * (cardsArr.length));
+                document.getElementById("memoryCards").innerHTML += '<input type="button" value="" id="kaart' + cardsArr.length + '" class="memoryCard" onclick="checkClickedCard(' + cardsArr[randomNumber] + ', \'kaart' + cardsArr.length + '\');">'
+
+                cardsArr.splice(randomNumber, 1);
+            }
+        }
+        const allCards = document.querySelectorAll('.memoryCards');
+        allCards.forEach(memoryCards => {
+            memoryCards.addEventListener('click', handlecardclicked)
+        })
+        //+=============++++++++++++++++++++++
+
+
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+
+    <body>
+
+        <div id="alert">
+
+
+        </div>
+        <div class="tries">
+            Wrong Tries: <span>0</span>
+        </div>
+        <div class="memoryContainer">
+            <h1>Memory</h1>
+            <div id="teller"></div>
+            <!--<input type="button" value="" id="kaart1" class="memoryCard" onclick="checkClickedCard(1, 'kaart1');" />
+        <input type="button" value="" id="kaart2" class="memoryCard" onclick="checkClickedCard(2, 'kaart2');" />
+        <input type="button" value="" id="kaart3" class="memoryCard" onclick="checkClickedCard(1, 'kaart3');" />
+        <input type="button" value="" id="kaart4" class="memoryCard" onclick="checkClickedCard(2, 'kaart4');" />
+        <input type="button" value="" id="kaart5" class="memoryCard" onclick="checkClickedCard(3, 'kaart5');" />
+        <input type="button" value="" id="kaart6" class="memoryCard" onclick="checkClickedCard(4, 'kaart6');" />
+        <input type="button" value="" id="kaart7" class="memoryCard" onclick="checkClickedCard(3, 'kaart7');" />
+        <input type="button" value="" id="kaart8" class="memoryCard" onclick="checkClickedCard(4, 'kaart8');" />-->
+            <div id="memoryCards"><input id="button" type="button" value="start game" onclick="shuffleCards();"></div>
+
+        </div>
+        <div class="shuffleContainer">
+            <input type="button" value="restart" onclick="shuffleCards()">
+        </div>
+
+
+    </body>
+
+</html>

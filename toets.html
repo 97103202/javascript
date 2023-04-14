@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="toets.css">
+    <script>
+        function checkForm() {
+            let vraag1 = document.getElementById('vraag1').value;
+            let vraag2 = document.getElementById('vraag1').value;
+            let vraag3 = document.getElementById('vraag1').value;
+            if (vraag1 === 'Madrid') {
+                document.getElementById('antwoord1').innerHTML = 'vraag 1 goed';
+            } else {
+                document.getElementById('antwoord1').innerHTML = 'vraag 1 fout';
+            }
+            if (vraag2 === 'Middellandse zee') {
+                document.getElementById('antwoord2').innerHTML = 'vraag 2 goed';
+            } else {
+                document.getElementById('antwoord2').innerHTML = 'vraag 2 fout';
+            }
+            if (vraag3 === '15 paar') {
+                document.getElementById('antwoord3').innerHTML = 'vraag 3 goed';
+            } else {
+                document.getElementById('antwoord3').innerHTML = 'vraag 3 fout';
+            }
+
+
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <h1>toets</h1>
+    <div id="vragen">
+        <label for="beanteoord" class="font">vragen:</label><br>
+        <p class="font">1. Vraag: Wat is de hoofdstad van Spanje?</p>
+        <input type="text" id="vraag1" name="vraag1"><br>
+        <p class="font">2. Vraag: In welke zee ligt het eiland Mallorca?</p>
+        <input type="text" id="vraag2" name="vraag2"><br>
+        <p class="font">3. vraag Hoeveel paar poten hee een duizendpoot?</p>
+        <input type="text" id="vraag3" name="vraag3"><br>
+
+
+        <br />
+        <input type="button" value="controleer antwoorden" onclick="checkForm()" />
+        <div id="antwoord1">
+        </div>
+        <div id="antwoord2">
+        </div>
+        <div id="antwoord3">
+        </div>
+    </div>
+</body>
+
+</html>

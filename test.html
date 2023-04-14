@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css?=v071120221054">
+    <title>Memory Game</title>
+
+    <script>
+        let userClick1 = 0;
+        let userClick2 = 0;
+        let teller = 0;
+        let userSelectedCard1 = "";
+        let userSelectedCard2 = "";
+        function checkClickedCard(cardNum, cardId) {
+            //Geklikte kaart disablen, want je mag maar een keer op dezelfde kaart klikken.
+            document.getElementById(cardId).disabled = true;
+            //Juiste waarde op de kaart zetten.
+            document.getElementById(cardId).value = cardNum;
+
+            //Lees en onthoudt klik1 en klik2
+            if (userClick1 === 0) {
+                userClick1 = cardNum;
+                userSelectedCard1 = cardId;
+                console.log("Klik 1: " + cardId);
+                document.getElementById(cardId).style.backgroundImage = "url(images/" + cardNum + ".jpg)";
+                playSound();
+            } else {
+                userClick2 = cardNum;
+                userSelectedCard2 = cardId;
+                console.log("Klik 2: " + cardId)
+                document.getElementById(cardId).style.backgroundImage = "url(images/" + cardNum + ".jpg";
+                playSound();
+            }
+
+            if (userClick2 !== 0) {
+                if (userClick1 === userClick2) {
+                    document.getElementById('gok').innerHTML = "Goed zo...";
+                    console.log("Goed");
+                } else {
+                    document.getElementById('gok').innerHTML = "Fout";
+                    console.log("Fout");
+                    document.getElementById(userSelectedCard1).disabled = false;
+                    document.getElementById(userSelectedCard2).disabled = false;
+                    document.getElementById(userSelectedCard1).value = "";
+                    document.getElementById(userSelectedCard2).value = "";
+                    setTimeout(turnBack, 2000);
+
+                    function turnBack() {
+                        document.getElementById(userSelectedCard1).style.backgroundImage = "url(images/BlauwHokje.jpg";
+                        document.getElementById(userSelectedCard2).style.backgroundImage = "url(images/BlauwHokje.jpg";
+                    }
+                }
+                teller++;
+                document.getElementById("teller").innerHTML = "Je hebt " + teller + " pogingen gedaan!"
+                userClick1 = 0;
+                userClick2 = 0;
+            }
+        }
+
+        function shuffleCards() {
+            document.getElementById("memoryCards").innerHTML = '';
+            let cardsArr = [];
+            for (let i = 1; i < (20 / 2) + 1; i++) {
+                cardsArr.push(i);
+                cardsArr.push(i);
+            }
+            while (cardsArr.length > 0) {
+                let randomNumber = Math.floor(Math.random() * (cardsArr.length));
+                document.getElementById("memoryCards").innerHTML += '<input type="button" value="" id="kaart' + cardsArr.length + '" class="memoryCard" onclick="checkClickedCard(' + cardsArr[randomNumber] + ', \'kaart' + cardsArr.length + '\');">'
+                cardsArr.splice(randomNumber, 1);
+            }
+        }
+
+        function playSound() {
+            document.getElementById("playSound").play();
+        }
+    </script>
+</head>
+
+<body>
+    <nav>
+        <a href="./index.html">Hoofdstuk 4</a>
+        <a href="./getallen.html">Getallen</a>
+        <a href="./toets.html">Toets</a>
+        <a href="./rockPaperScissors.html">Steen Papier Schaar</a>
+        <a href="./memory.html">Memory</a>
+    </nav>
+
+    <audio id="playSound">
+        <source src="sounds/ping.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="memoryContainer">
+        <h1>Memory</h1>
+        <div id="memoryCards"></div>
+    </div>
+
+    <div class="guessContainer" id="gok"></div>
+    <div class="guessContainer" id="teller"></div>
+
+    <div class="shuffleContainer">
+        <input type="button" value="Klik hier om de kaarten te schudden." onclick="shuffleCards()">
+    </div>
+
+</body>
+
+</html>>
