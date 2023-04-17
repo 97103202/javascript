@@ -70,7 +70,7 @@
 
         var userClick1 = 0;
         var userClick2 = 0;
-        let teller = 0;
+        var teller = 0;
         var userSelectedCard1 = "";
         var userSelectedCard2 = "";
 
@@ -102,49 +102,35 @@
                     document.getElementById('alert').innerHTML = 'goed zo';
 
                     console.log('goed')
+                    resetParams();
 
                 } else {
                     let triesElement = document.querySelector('.tries span');
 
                     document.getElementById('alert').innerHTML = 'fout';
                     console.log('fout');
-                    document.getElementById(userSelectedCard1).
-                        disabled = false;
-                    document.getElementById(userSelectedCard2).
-                        disabled = false;
-                    document.getElementById(userSelectedCard1).value = "";
-                    document.getElementById(userSelectedCard2).value = "";
-
-
+                    document.getElementById(userSelectedCard1).disabled = false;
+                    document.getElementById(userSelectedCard2).disabled = false;
                     setTimeout(turnBack, 2000);
-
                     triesElement.innerHTML = parseInt(triesElement.innerHTML) + 1;
-
-
-
                 }
 
             }
-
-
-
-
-
-            function turnBack() {
-                document.getElementById(userSelectedCard1).style.backgroundImage = "url(memory/background.png)";
-                document.getElementById(userSelectedCard2).style.backgroundImage = "url(memory/background.png)";
-            }
         }
-        teller++;
-        document.getElementById("teller").innerHTML = "Je hebt " + teller + " pogingen gedaan!"
+
+    function turnBack() {
+            document.getElementById(userSelectedCard1).style.backgroundImage = "url(memory/background.png)";
+            document.getElementById(userSelectedCard2).style.backgroundImage = "url(memory/background.png)";
+            resetParams();
+        }
+
+        //Nieuwe functie toegevoegd
+        function resetParams(){
         userClick1 = 0;
         userClick2 = 0;
-
-
-
-
-
-
+        userSelectedCard1 = "";
+        userSelectedCard2 = "";
+    }
 
         function shuffleCards() {
             document.getElementById("memoryCards").innerHTML = '';
